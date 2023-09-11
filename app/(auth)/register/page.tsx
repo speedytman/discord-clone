@@ -7,15 +7,6 @@ const RegisterPage = () => {
   return (
     <>
       <div className="container flex h-[800px] flex-col items-center justify-center">
-        <Link
-          href="/login"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
-          )}
-        >
-          Login
-        </Link>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
@@ -27,6 +18,22 @@ const RegisterPage = () => {
               </p>
             </div>
             <RegisterForm />
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Already Have An Account
+                </span>
+              </div>
+            </div>
+            <Link
+              href="/login"
+              className={cn(buttonVariants({ variant: "secondary" }))}
+            >
+              Login
+            </Link>
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link

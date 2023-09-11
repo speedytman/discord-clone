@@ -79,7 +79,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-2">
-            <div className="grid gap-1">
+            <div className="grid gap-2">
               <FormField
                 control={form.control}
                 name="email"
@@ -94,6 +94,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                         type="email"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>
@@ -113,6 +114,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                         type="password"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>

@@ -106,7 +106,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-2">
-            <div className="grid gap-1">
+            <div className="grid gap-2">
               <FormField
                 control={form.control}
                 name="username"
@@ -121,6 +121,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         type="text"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>
@@ -140,6 +141,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         type="email"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>
@@ -159,6 +161,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         type="password"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>
@@ -178,6 +181,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         type="password"
                         disabled={isLoading}
                         {...field}
+                        className="bg-stone-900"
                       />
                     </FormControl>
                   </FormItem>

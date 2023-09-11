@@ -42,7 +42,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="w-56 bg-white rounded-xl"
+          className="w-56 bg-stone-700 rounded-xl m-2"
           align="end"
           forceMount
         >
@@ -57,7 +57,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
           <DropdownMenuSeparator className="bg-slate-200" />
           <DropdownMenuGroup>
             <DropdownMenuItem
-              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-600"
+              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-500"
               onSelect={() => router.push("/profile")}
             >
               Profile

@@ -3,12 +3,12 @@ import UserMenu from "@/components/user-menu";
 import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();
-
-  if (!session) {
-    return;
+  if (!session?.user) {
+    redirect("/login");
   }
   return (
     <div>
