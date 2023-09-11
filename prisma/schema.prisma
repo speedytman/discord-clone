@@ -52,11 +52,11 @@ model VerificationToken {
 
 model User {
   id             String    @id @default(uuid())
-  username       String?
-  email          String?   @unique
+  name           String
+  email          String    @unique
   emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
+  imageUrl       String    @db.Text
+  hashedPassword String
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   account        Account[]

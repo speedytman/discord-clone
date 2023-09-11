@@ -7,13 +7,15 @@ export async function POST(
   req: Request,
 ) {
   try {
-    const { username, email, password } = await req.json()
+    const { name, email, password } = await req.json()
     if(!email){
       return new NextResponse("Email Required", { status: 400})
     }
     if(!password){
       return new NextResponse("Password Required", { status: 400})
     }
+
+    const imageUrl = "https://imgur.com/jNNT4LE"
 
     
 
@@ -30,9 +32,10 @@ export async function POST(
 
     const newUser = await db.user.create({
         data: {
-          username,
+          name,
           email,
-          hashedPassword
+          hashedPassword,
+          imageUrl
         }
       })
 

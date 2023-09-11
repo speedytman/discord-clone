@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/sign-in',
+    signIn: '/login',
   },
   secret: process.env.AUTH_SECRET,
   providers: [
@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id
         session.user.name = token.name
         session.user.email = token.email
-        session.user.image = token.picture
+        session.user.imageUrl = token.imageUrl
       }
   
       return session
@@ -85,8 +85,8 @@ export const authOptions: NextAuthOptions = {
       return {
         id: dbUser.id,
         email: dbUser.email,
-        picture: dbUser.image,
-        username: dbUser.username,
+        imageUrl: dbUser.imageUrl,
+        name: dbUser.name,
       }
     },
 

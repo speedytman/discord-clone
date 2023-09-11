@@ -25,7 +25,7 @@ interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z
   .object({
-    username: z.string().min(3).max(30),
+    name: z.string().min(3).max(30),
     email: z.string().email({ message: "Invalid email address" }),
     password: z
       .string()
@@ -55,7 +55,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -109,15 +109,15 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
             <div className="grid gap-2">
               <FormField
                 control={form.control}
-                name="username"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <p>Username</p>
+                      <p>Name</p>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="user12345"
+                        placeholder="John Smith"
                         type="text"
                         disabled={isLoading}
                         {...field}
