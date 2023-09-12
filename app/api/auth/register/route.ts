@@ -15,7 +15,7 @@ export async function POST(
       return new NextResponse("Password Required", { status: 400})
     }
 
-    const imageUrl = "https://imgur.com/jNNT4LE"
+    const imageUrl = "https://imgur.com/jNNT4LE.png"
 
     
 

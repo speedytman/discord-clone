@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ModeToggle } from "./mode-toggle";
 
 interface UserMenuProps {
   image: string;
@@ -31,18 +32,24 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={image} />
+        <DropdownMenuTrigger
+          asChild
+          className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]"
+        >
+          <Button
+            variant="outline"
+            className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]"
+          >
+            <Avatar className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]">
+              <AvatarImage className="" src={image} alt="avatar" />
               <AvatarFallback>
-                <AvatarPlaceholder size={40} />
+                {name.split("").at(0)?.toUpperCase()}
               </AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="w-56 bg-stone-700 rounded-xl m-2"
+          className="w-56 bg-white dark:bg-stone-700 rounded-xl m-2"
           align="end"
           forceMount
         >
@@ -54,7 +61,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
               </p>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-slate-200" />
+          <DropdownMenuSeparator className="bg-slate-700 dark:bg-slate-200" />
           <DropdownMenuGroup>
             <DropdownMenuItem
               className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-500"
@@ -75,7 +82,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
               Settings
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator className="bg-slate-200" />
+          <DropdownMenuSeparator className="bg-slate-700 dark:bg-slate-200" />
+          <DropdownMenuGroup className="p-2">
+            <ModeToggle />
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator className="bg-slate-700 dark:bg-slate-200" />
           <DropdownMenuItem
             className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-600"
             onSelect={handleSignout}
