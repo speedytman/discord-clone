@@ -2,7 +2,6 @@
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { RxAvatar as AvatarPlaceholder } from "react-icons/rx";
 
 import {
   DropdownMenu,
@@ -13,9 +12,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ModeToggle } from "./mode-toggle";
+import Image from "next/image";
 
 interface UserMenuProps {
   image: string;
@@ -34,22 +33,20 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]"
+          className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] data-[state=open]:rounded-[16px] overflow-hidden"
         >
-          <Button
-            variant="outline"
-            className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]"
-          >
-            <Avatar className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px]">
-              <AvatarImage className="" src={image} alt="avatar" />
+          <button className="outline-none">
+            <Avatar className="h-full w-full rounded-none">
+              <Image fill src={image} alt="avatar" />
               <AvatarFallback>
                 {name.split("").at(0)?.toUpperCase()}
               </AvatarFallback>
             </Avatar>
-          </Button>
+          </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           className="w-56 bg-white dark:bg-stone-700 rounded-xl m-2"
+          side="right"
           align="end"
           forceMount
         >

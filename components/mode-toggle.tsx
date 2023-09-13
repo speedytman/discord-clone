@@ -9,8 +9,6 @@ import { Switch } from "./ui/switch";
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
 
-  const formatedTheme = theme?.charAt(0).toUpperCase()! + theme?.slice(1);
-
   const onSliderToggle = () => {
     if (theme === "dark") {
       setTheme("light");
@@ -21,14 +19,14 @@ export function ModeToggle() {
 
   return (
     <div className="flex items-center justify-between gap-2">
+      <label htmlFor="dark-mode" className="text-sm font-semibold">
+        Toggle Dark Mode:
+      </label>
       <Switch
         id="dark-mode"
         checked={theme === "dark"}
         onCheckedChange={onSliderToggle}
       />
-      <label htmlFor="dark-mode" className="text-sm font-semibold">
-        {formatedTheme} Mode
-      </label>
     </div>
   );
 }
