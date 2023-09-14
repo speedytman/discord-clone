@@ -5,7 +5,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { MemberRole } from "@prisma/client";
 
-export async function POST(req: Request){
+export async function PATCH(req: Request, { params }: {params: {serverId: string}}){
   try {
     const{name, imageUrl} = await req.json();
     const profile = await currentProfile()
@@ -14,27 +14,18 @@ export async function POST(req: Request){
       return new NextResponse("Unauthorized", {status: 401})
     }
 
-    const server = await db.server.create({
-      data: {
-        profileId: profile.id,
+    const server = await db.server.update({
+      where: {
+        id: params.serverId 
+      },
+      data: { 
         name,
-        imageUrl,
-        inviteCode: uuidv4(),
-        channels: {
-          create: [
-            {name: "general", profileId: profile.id}
-          ]
-        },
-        members: {
-          create: [
-            { profileId: profile.id, role: MemberRole.ADMIN}
-          ]
-        }
+        imageUrl, 
       }
     })
     return NextResponse.json(server)
   } catch (error) {
-    console.log("[SERVERS_POST]", error)
+    console.log("[SERVERS_PATCH]", error)
     return new NextResponse("Internal Error", {status: 500})
   }
 }
