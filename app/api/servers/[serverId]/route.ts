@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { MemberRole } from "@prisma/client";
 
 export async function PATCH(req: Request, { params }: {params: {serverId: string}}){
   try {

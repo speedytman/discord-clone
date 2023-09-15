@@ -67,13 +67,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-600"
+              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-500"
               onSelect={() => router.push("/billing")}
             >
               Billing
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-600"
+              className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-500"
               onSelect={() => router.push("/settings")}
             >
               Settings
