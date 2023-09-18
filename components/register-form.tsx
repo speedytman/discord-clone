@@ -16,6 +16,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
@@ -66,7 +67,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
     try {
       setIsLoading(true);
       if (data.password !== data.confirmPassword) {
-        toast({
+        return toast({
           title: "Passwords must match",
           variant: "destructive",
         });
@@ -124,6 +125,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -144,6 +146,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -164,6 +167,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -184,6 +188,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

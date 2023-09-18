@@ -4,6 +4,7 @@ import { Open_Sans } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import ModalProvider from "@/components/providers/modal-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           storageKey="discord-theme"
         >
           <ModalProvider />
+          <Toaster />
           {children}
         </ThemeProvider>
       </body>

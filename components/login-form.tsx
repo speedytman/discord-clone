@@ -15,6 +15,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
@@ -68,7 +69,11 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
     try {
       await signIn("google");
     } catch (error) {
-      // toast notification
+      toast({
+        title: "Unknown Error",
+        description: `${error}`,
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -97,6 +102,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -117,6 +123,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                         className="bg-stone-900"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
