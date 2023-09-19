@@ -5,6 +5,7 @@ import { Open_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import ModalProvider from "@/components/providers/modal-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { SocketProvider } from "@/components/providers/socket-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -21,16 +22,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={font.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          storageKey="discord-theme"
-        >
-          <ModalProvider />
-          <Toaster />
-          {children}
-        </ThemeProvider>
+        <SocketProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            storageKey="discord-theme"
+          >
+            <ModalProvider />
+            <Toaster />
+            {children}
+          </ThemeProvider>
+        </SocketProvider>
       </body>
     </html>
   );
