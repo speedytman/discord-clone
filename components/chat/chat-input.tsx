@@ -1,14 +1,16 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Smile } from "lucide-react";
 import axios from "axios";
-import queryString from "query-string";
+import qs from "query-string";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -21,28 +23,35 @@ const formSchema = z.object({
   content: z.string().min(1),
 });
 
-const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
+export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
+  const { onOpen } = useModal();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       content: "",
     },
-    resolver: zodResolver(formSchema),
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const url = queryString.stringifyUrl({
+      const url = qs.stringifyUrl({
         url: apiUrl,
         query,
       });
 
       await axios.post(url, values);
+
+      form.reset();
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -68,9 +77,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
                     }`}
                     {...field}
                   />
-                  <div className="absolute top-7 right-8">
-                    <Smile />
-                  </div>
+                  <div className="absolute top-7 right-8"></div>
                 </div>
               </FormControl>
             </FormItem>
@@ -80,5 +87,3 @@ const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
     </Form>
   );
 };
-
-export default ChatInput;
