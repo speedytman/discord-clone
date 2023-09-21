@@ -6,7 +6,7 @@ import { getOrCreateConversation } from "@/lib/conversation";
 import ChatHeader from "@/components/chat/chat-header";
 import ChatMessages from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
-import MediaRoom from "@/components/media-room";
+import { MediaRoom } from "@/components/media-room";
 
 interface MemberIDPageProps {
   params: {
