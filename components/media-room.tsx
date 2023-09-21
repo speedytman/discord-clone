@@ -13,29 +13,27 @@ interface MediaRoomProps {
   audio: boolean;
 }
 
-const MediaRoom: React.FC<MediaRoomProps> = ({ chatId, video, audio }) => {
+export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
   const { data: session } = useSession();
-  if (!session) {
-    return;
-  }
-  const user = session.user;
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (!user?.name) return;
+    if (!session) return;
+
+    const name = session.user.name;
 
     (async () => {
       try {
-        const res = await fetch(
-          `/api/livekit?room=${chatId}&username=${user.name}`
+        const resp = await fetch(
+          `/api/livekit?room=${chatId}&username=${name}`
         );
-        const data = await res.json();
+        const data = await resp.json();
         setToken(data.token);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        console.log(e);
       }
     })();
-  }, [user?.name, chatId]);
+  }, [session, chatId]);
 
   if (token === "") {
     return (
@@ -59,5 +57,3 @@ const MediaRoom: React.FC<MediaRoomProps> = ({ chatId, video, audio }) => {
     </LiveKitRoom>
   );
 };
-
-export default MediaRoom;
