@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -12,17 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ModeToggle } from "@/components/mode-toggle";
-import Image from "next/image";
+import ActionTooltip from "@/components/action-tooltip";
 
-interface UserMenuProps {
-  image: string;
-  name: string;
-  email: string;
-}
-
-const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
+const UserMenu = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const handleSignout = async () => {
     await signOut();
@@ -33,16 +28,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] data-[state=open]:rounded-[16px] overflow-hidden"
+          className="h-[48px] w-[48px] rounded-[24px] hover:rounded-[16px] data-[state=open]:rounded-[16px] overflow-hidden hover:cursor-pointer"
         >
-          <button className="outline-none">
-            <Avatar className="h-full w-full rounded-none">
-              <Image fill src={image} alt="avatar" />
-              <AvatarFallback>
-                {name.split("").at(0)?.toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-          </button>
+          <Avatar className="h-[48px] w-[48px] rounded-[24px]">
+            <ActionTooltip side="right" align="center" label="Menu">
+              <AvatarImage src={session?.user.imageUrl} />
+            </ActionTooltip>
+          </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           className="w-56 bg-white dark:bg-stone-700 rounded-xl m-2"
@@ -52,14 +44,17 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
         >
           <DropdownMenuLabel className="font-normal cursor-default">
             <div className="flex flex-col gap-y-2">
-              <p className="text-sm font-medium leading-none">{name}</p>
+              <p className="text-sm font-medium leading-none">
+                {session?.user.name}
+              </p>
               <p className="text-xs leading-none text-muted-foreground">
-                {email}
+                {session?.user.email}
               </p>
             </div>
           </DropdownMenuLabel>
+          {/*
           <DropdownMenuSeparator className="bg-slate-700 dark:bg-slate-200" />
-          <DropdownMenuGroup>
+           <DropdownMenuGroup>
             <DropdownMenuItem
               className="hover:cursor-pointer border border-transparent rounded-xl hover:border-slate-500"
               onSelect={() => router.push("/profile")}
@@ -78,7 +73,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ image, name, email }) => {
             >
               Settings
             </DropdownMenuItem>
-          </DropdownMenuGroup>
+          </DropdownMenuGroup> */}
           <DropdownMenuSeparator className="bg-slate-700 dark:bg-slate-200" />
           <DropdownMenuGroup className="p-2">
             <ModeToggle />
